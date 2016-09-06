@@ -6,7 +6,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'vim-airline'                    " 화면 상하단에 상태바(버퍼, 탭, 입력상태) 표시 (커스터마이징 가능)
+Plug 'vim-airline/vim-airline'        " 화면 상하단에 상태바(버퍼, 탭, 입력상태) 표시 (커스터마이징 가능)
 Plug 'myusuf3/numbers.vim'            " set nu 화면을 상대번호로 변경 (d,y,j와 같은 명령에필요한 상대번호 확인에 유용)
 Plug 'kshenoy/vim-signature'          " 북마크 확장 - 자동 알파벳팅, 순회, 등?
 Plug 'scrooloose/nerdtree'            " 파일탐색기 (윈도우탐색기와 같은 화면과 북마크, 탭열기, 루트 디렉토리 변경하기 등의 기능) 
@@ -67,7 +67,6 @@ set hidden                                      " 저장안된 버퍼도 화면 
 
 syntax on                                       " 구문강조 사용
 filetype indent on                              " 파일 종류에 따른 구문강조
-colorscheme jellybeans                          " vi 색상 테마 설정
 
 " macvim에서 insert mode를 나올때 영문상태로 전환함
 set noimd
@@ -135,6 +134,9 @@ inoremap <C-k> <Up>
 inoremap <C-j> <Down>
 inoremap <C-l> <Right>
 inoremap <C-h> <Left>
+
+map <silent> 9 $
+map <silent> 0 ^
 
 " > Plugin vim-airline
 let g:airline#extensions#tabline#enabled=1      " 탭 사용시 상단에 탭목록 표시
@@ -261,3 +263,27 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 " Advanced customization using autoload functions
 inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
 " }}}
+
+" {{{ auto save/load session
+  " Automatically save the current session whenever vim is closed
+  autocmd VimLeave * mksession! ~/.vim/shutdown_session.vim
+  
+  " <F7> restores that 'shutdown session'
+  noremap <F7> :source ~/.vim/shutdown_session.vim<CR>
+  
+  " If you really want to, this next line should restore the shutdown session 
+  " automatically, whenever you start vim.  (Commented out for now, in case 
+  " somebody just copy/pastes this whole block)
+  " 
+  autocmd VimEnter source ~/.vim/shutdown_session.vim<CR>
+  
+  " manually save a session with <F5>
+  noremap <F5> :mksession! ~/.vim/manual_session.vim<cr>
+  
+  " recall the manually saved session with <F6>
+  noremap <F6> :source ~/.vim/manual_session.vim<cr>
+  
+  set viminfo+=%
+  set hidden
+
+"}}}
