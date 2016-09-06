@@ -284,6 +284,5 @@ inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
   noremap <F6> :source ~/.vim/manual_session.vim<cr>
   
   set viminfo+=%
-  set hidden
 
 "}}}
