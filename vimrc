@@ -19,10 +19,11 @@ Plug 'tomtom/tcomment_vim'            " 주석(comment) 기능으로 사용하�
 Plug 'tpope/vim-surround'             " '', {}, [], <p></p>와 같은 구문들을 편리하게 입력, 수정 할 수 있음
 
 Plug 'airblade/vim-gitgutter'
-Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'leafgarland/typescript-vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'Quramy/tsuquyomi'
+Plug 'majutsushi/tagbar'
 
 " Plugin 'jelera/vim-javascript-syntax'
 " Plugin 'marijnh/tern_for_vim'
@@ -79,6 +80,7 @@ map <leader>ev :e! ~/.vimrc<cr>
 " Function keys
 nnoremap <F2> :NERDTreeToggle<CR>               " NERDTree 보이기/감추기
 nnoremap <F7> :SyntasticCheck<CR>               " 문법(Syntastic) 체크
+nmap <F8> :TagbarToggle<CR>
 nnoremap <F9> :e!<CR>                           " 저장안된 파일의 수정내용을 취소
 nnoremap <F10> :bd<CR>                          " 버퍼 삭제
 nnoremap <F11> :bN<CR>                          " 이전 버퍼를 현재 윈도우에 표시
@@ -286,3 +288,8 @@ inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
   set viminfo+=%
 
 "}}}
+
+set foldmethod=syntax
+set foldlevelstart=1
+
+let javaScript_fold=1         " JavaScript
